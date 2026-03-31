@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1= title
+  - var results = [ {name: 'Ear Ring', price: 5000, description: '24 karat gold'}, {name: 'Ring', price: 10000, description: '42 karat diamond'}, {name: 'Necklace', price: 2000, description: '22 karat gold'}]
+
+  div.container-fluid
+    div.row
+      each item in results
+        div.col-sm-2
+          h5 #{item.name}
+          p Price: #{item.price}
+          p #{item.description}
