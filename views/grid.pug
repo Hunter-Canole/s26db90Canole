@@ -2,6 +2,39 @@ extends layout
 
 block content
   h1= title
+  p rows= #{query.rows}
+  p cols = #{query.cols}
+
+  - var rows = Number(query.rows)
+  - var col = Number(query.cols)
+
+  if(!Number.isInteger(rows))
+    p rows is not an integer
+
+  else if(!Number.isInteger(col))
+    p cols is not an integer
   
+  else if(rows > 12)
+    p rows is greater than 12
+
+  else if(rows <  2)
+    p rows is less than 2
+  
+  else if(col > 12)
+    p col is greater than 12
+  
+  else if(col < 2)
+    p col is less than 2
+  
+  else 
+    table#outer
+      - for(let i=0; i<rows; i++) {
+        tr#middle
+        - for(let j=0; j<col; j++) {
+          td= 2 * i - j
+        - }
+      - }  
+      
+    
 
   
