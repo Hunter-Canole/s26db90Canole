@@ -28,8 +28,11 @@ block content
   
   else 
     table#outer
-      - for(let i=0; i<10; i++) {
+      - for(let i=0; i<rows; i++) {
         tr#middle
+        - for(let j=0; j<col; j++) {
+          td= 2 * i - j
+        - }
       - }  
       
     
