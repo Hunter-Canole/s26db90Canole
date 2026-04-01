@@ -2,4 +2,14 @@ extends layout
 
 block content
   h1= title
-  
+  - var image_names  = ['earing1.jpg', 'earing2.jpg', 'Necklace1.jpg', 'Necklace2.jpg', 'ring1.webp']
+  - for(let i=0; i<3; i++) { 
+    - var rand = Math.floor(Math.random()*5)
+    - var item = image_names[rand]
+    img(
+    src=`/${item}`
+    alt=`Image of ${item}`
+    width="300"
+    height="300"
+    )
+  - }
