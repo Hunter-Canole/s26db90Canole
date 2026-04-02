@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  h1= title
+  p Hunter Canole
+  p I am a intramural basketball champion
+  <button type="button" class="btn btn-dark">Press Button</button>
+  <div id='use'>
+	take some away
+  </div>
+  
