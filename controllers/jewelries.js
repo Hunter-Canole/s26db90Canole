@@ -1,8 +1,16 @@
 var Jewelry = require('../models/jewelry');
 // List of all Costumes
-exports.jewelry_list = function(req, res) {
-res.send('NOT IMPLEMENTED: Jewelry list');
+exports.jewelry_list = async function(req, res) {
+try{
+theJewelries = await Jewelry.find();
+res.send(theJewelries);
+}
+catch(err){
+res.status(500);
+res.send(`{"error": ${err}}`);
+}
 };
+
 // for a specific Costume.
 exports.jewelry_detail = function(req, res) {
 res.send('NOT IMPLEMENTED: Jewelry detail: ' + req.params.id);
@@ -19,3 +27,4 @@ res.send('NOT IMPLEMENTED: Jewelry delete DELETE ' + req.params.id);
 exports.jewelry_update_put = function(req, res) {
 res.send('NOT IMPLEMENTED: Jewelry update PUT' + req.params.id);
 };
+
