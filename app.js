@@ -1,24 +1,21 @@
+require('dotenv').config();
+const mongoose = require('mongoose');
+const connectionString = process.env.MONGO_CON;
+
+// 2. Database Connection
+mongoose.connect(connectionString);
+const db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.once("open", function(){
+  console.log("Connection to DB succeeded");
+});
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-require('dotenv').config();
-const connectionString = process.env.MONGO_CON
-mongoose = require('mongoose');
-mongoose.connect(connectionString);
-mongoose.connection.on('connected', () => {
-  console.log('✅ MongoDB connected');
-});
-
-mongoose.connection.on('error', (err) => {
-  console.log('❌ MongoDB connection error:', err);
-});
-
-mongoose.connection.on('disconnected', () => {
-  console.log('⚠️ MongoDB disconnected');
-});
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');

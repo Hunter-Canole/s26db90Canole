@@ -15,7 +15,7 @@ res.send(`{"error": ${err}}`);
 exports.jewelry_view_all_Page = async function(req, res) {
 try{
 const theJewelries = await Jewelry.find();
-res.render('jewelries', { title: 'Jewelry Search Results', results: theJewelries });
+res.render('jewelry', { title: 'Jewelry Search Results', results: theJewelries });
 }
 catch(err){
 res.status(500);
