@@ -1,9 +1,16 @@
-var express = require('express');
-var router = express.Router();
+// routes/jewelry.js
+const express = require('express');
+const router = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('jewelry', { title: 'Search Results Jewelry' });
-});
+// Correctly require the controller (match file name)
+const jewelry_controllers = require('../controllers/jewelries');
 
+// Route to render all jewelry page
+router.get('/', jewelry_controllers.jewelry_view_all_Page);
+
+// Route to get all jewelry as JSON
+router.get('/list', jewelry_controllers.jewelry_list);
+
+// Export the router
 module.exports = router;
+

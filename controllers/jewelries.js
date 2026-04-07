@@ -2,7 +2,7 @@ var Jewelry = require('../models/jewelry');
 // List of all Costumes
 exports.jewelry_list = async function(req, res) {
 try{
-theJewelries = await Jewelry.find();
+const theJewelries = await Jewelry.find();
 res.send(theJewelries);
 }
 catch(err){
@@ -12,8 +12,15 @@ res.send(`{"error": ${err}}`);
 };
 
 // for a specific Costume.
-exports.jewelry_detail = function(req, res) {
-res.send('NOT IMPLEMENTED: Jewelry detail: ' + req.params.id);
+exports.jewelry_view_all_Page = async function(req, res) {
+try{
+const theJewelries = await Jewelry.find();
+res.render('jewelries', { title: 'Jewelry Search Results', results: theJewelries });
+}
+catch(err){
+res.status(500);
+res.send(`{"error": ${err}}`);
+}
 };
 // Handle Costume create on POST.
 exports.jewelry_create_post = function(req, res) {
