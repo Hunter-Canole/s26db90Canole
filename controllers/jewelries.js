@@ -38,10 +38,20 @@ let result = await document.save();
 res.send(result);
 }
 catch(err){
-res.status(500);
-res.send(`{"error": ${err}}`);
+    res.status(500).json({ error: err.message });
 }
 };
+exports.jewelry_detail = async function(req, res) {
+console.log("detail" + req.params.id)
+try {
+result = await Jewelry.findById( req.params.id)
+res.send(result)
+} catch (error) {
+res.status(500)
+res.send(`{"error": document for id ${req.params.id} not found`);
+}
+};
+
 // Handle Costume delete from on DELETE.
 exports.jewelry_delete = function(req, res) {
 res.send('NOT IMPLEMENTED: Jewelry delete DELETE ' + req.params.id);
