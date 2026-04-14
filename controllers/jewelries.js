@@ -87,4 +87,39 @@ res.status(500)
 res.send(`{'error': '${err}'}`);
 }
 };
+exports.jewelry_create_Page = function(req, res) {
+console.log("create view")
+try{
+res.render('jewelrycreate', { title: 'Jewelry Create'});
+}
+catch(err){
+res.status(500)
+res.send(`{'error': '${err}'}`);
+}
+};
+// Handle building the view for updating a costume.
+// query provides the id
+exports.jewelry_update_Page = async function(req, res) {
+console.log("update view for item "+req.query.id)
+try{
+let result = await Jewelry.findById(req.query.id)
+res.render('jewelryupdate', { title: 'Jewelry Update', toShow: result });
+}
+catch(err){
+res.status(500)
+res.send(`{'error': '${err}'}`);
+}
+};
 
+exports.jewelry_delete_Page = async function(req, res) {
+console.log("Delete view for id " + req.query.id)
+try{
+result = await Jewelry.findById(req.query.id)
+res.render('jewelrydelete', { title: 'Jewelry Delete', toShow:
+result });
+}
+catch(err){
+res.status(500)
+res.send(`{'error': '${err}'}`);
+}
+};
