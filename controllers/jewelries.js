@@ -75,4 +75,16 @@ res.send(`{"error": ${err}: Update for id ${req.params.id}
 failed`);
 }
 };
+exports.jewelry_view_one_Page = async function(req, res) {
+console.log("single view for id " + req.query.id)
+try{
+result = await Jewelry.findById( req.query.id)
+res.render('jewelrydetail',
+{ title: 'Jewelry  Detail', toShow: result });
+}
+catch(err){
+res.status(500)
+res.send(`{'error': '${err}'}`);
+}
+};
 

@@ -14,8 +14,9 @@ router.delete('/jewelries/:id', jewelry_controller.jewelry_delete);
 // PUT request to update Costume.
 router.put('/jewelries/:id', jewelry_controller.jewelry_update_put);
 // GET request for one Costume.
-router.get('/jewelries', jewelry_controller.jewelry_view_all_Page);
+router.get('/jewelries/:id', jewelry_controller.jewelry_view_all_Page);
 // GET request for list of all Costume items.
 router.get('/jewelries', jewelry_controller.jewelry_list);
-router.get('/jewelries/:id', jewelry_controller.jewelry_detail);
+//router.get('/jewelries/:id', jewelry_controller.jewelry_detail);
+router.get('/detail', jewelry_controlers.jewelry_view_one_Page);
 module.exports = router;
