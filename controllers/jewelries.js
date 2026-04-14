@@ -13,16 +13,15 @@ res.send(`{"error": ${err}}`);
 
 // for a specific Costume.
 exports.jewelry_view_all_Page = async function(req, res) {
-try{
-const theJewelries = await Jewelry.find();
-res.render('jewelry', { title: 'Jewelry Search Results', results: theJewelries });
-}
-catch(err){
-res.status(500);
-res.send(`{"error": ${err}}`);
-}
+console.log("detail" + req.params.id)
+ try {
+ result = await Jewelry.findById( req.params.id)
+res.send(result)
+ } catch (error) {
+ res.status(500)
+ res.send(`{"error": document for id ${req.params.id} not found`);
+ }
 };
-
 exports.jewelry_create_post = async function(req, res) {
 console.log(req.body)
 let document = new Jewelry();
@@ -41,23 +40,39 @@ catch(err){
     res.status(500).json({ error: err.message });
 }
 };
-exports.jewelry_detail = async function(req, res) {
-console.log("detail" + req.params.id)
+
+// Handle Costume delete from on DELETE.
+exports.jewelry_delete = async function(req, res) {
+console.log("delete " + req.params.id)
 try {
-result = await Jewelry.findById( req.params.id)
+result = await Jewelry.findByIdAndDelete( req.params.id)
+console.log("Removed " + result)
 res.send(result)
-} catch (error) {
+} catch (err) {
 res.status(500)
-res.send(`{"error": document for id ${req.params.id} not found`);
+res.send(`{"error": Error deleting ${err}}`);
 }
 };
 
-// Handle Costume delete from on DELETE.
-exports.jewelry_delete = function(req, res) {
-res.send('NOT IMPLEMENTED: Jewelry delete DELETE ' + req.params.id);
-};
 // Handle Costume update form on PUT.
-exports.jewelry_update_put = function(req, res) {
-res.send('NOT IMPLEMENTED: Jewelry update PUT' + req.params.id);
+ //Handle Costume update form on PUT.
+exports.jewelry_update_put = async function(req, res) {
+console.log(`update on id ${req.params.id} with body
+${JSON.stringify(req.body)}`)
+try {
+let toUpdate = await Jewelry.findById( req.params.id)
+// Do updates of properties
+if(req.body.name)
+toUpdate.name = req.body.name;
+if(req.body.cost) toUpdate.cost = req.body.cost;
+if(req.body.description) toUpdate.description = req.body.description;
+let result = await toUpdate.save();
+console.log("Sucess " + result)
+res.send(result)
+} catch (err) {
+res.status(500)
+res.send(`{"error": ${err}: Update for id ${req.params.id}
+failed`);
+}
 };
 
