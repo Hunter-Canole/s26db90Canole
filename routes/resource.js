@@ -18,5 +18,5 @@ router.get('/jewelries/:id', jewelry_controller.jewelry_view_all_Page);
 // GET request for list of all Costume items.
 router.get('/jewelries', jewelry_controller.jewelry_list);
 //router.get('/jewelries/:id', jewelry_controller.jewelry_detail);
-router.get('/detail', jewelry_controlers.jewelry_view_one_Page);
+router.get('/detail', jewelry_controller.jewelry_view_one_Page);
 module.exports = router;
