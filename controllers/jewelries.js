@@ -10,7 +10,19 @@ res.status(500);
 res.send(`{"error": ${err}}`);
 }
 };
+exports.jewelry_lists = async function(req, res) {
+  try {
+    const data = await Jewelry.find();
 
+    res.render("jewelry", {
+      title: "Jewelry List",
+      results: data
+    });
+
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
 // for a specific Costume.
 exports.jewelry_view_all_Page = async function(req, res) {
 console.log("detail" + req.params.id)

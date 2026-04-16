@@ -4,9 +4,15 @@ block content
   h1= title
 
   div.container-fluid
-    div.row
+    div(class="row m-1")
       each item in results
+        - let destination = `dispatch("/resource/jewelries/update?id=${item._id}")`
         div.col-sm-2
           h5 #{item.name}
           p Price: #{item.cost}
           p #{item.description}
+          button.btn( class="btn-primary ml-1", onclick= destination) Update
+  script.
+    function dispatch(path){
+      window.location.href=path
+    }
