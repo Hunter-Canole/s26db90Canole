@@ -1,24 +1,12 @@
 extends layout
-
 block content
-  h1= title
-  p Hunter Canole
-  p I am a intramural basketball champion
-  <button type="button" class="btn btn-dark" onclick="redeuce()">Press Button</button>
-  div(id='use') take some away
-  a(href='http://localhost:3000/jewelry') Jewelry
-
-  script.
-    var current = 11
-    var quality = 2
-    function redeuce(){
-      current = current - quality
-      if(current<0)
-      {
-        current = 0;
-      }
-      const use  = document.getElementById('use');
-      use.innerText = `Reduced by ${quality} to ${current}`;
-    }
-
+  if (!user)
+    a(href="/login") Login
+    br
+    a(href="/register") Register
+  if (user)
+    p You are currently logged in as #{user.username}
+    a(href="/costumes") Take me to costumes
+    br
+    a(href="/logout") Logout
   
